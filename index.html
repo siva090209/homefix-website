@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HomeFix — Every home, every service</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/auth.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<header class="topbar">
+ <div class="wrap nav">
+  <a class="brand" href="#" onclick="showHome()"><span class="brandmark">⌂</span>HomeFix</a>
+  <nav class="navlinks" id="publicNav"><a href="#services">Our Services</a><a href="#how">How It Works</a><a href="#" onclick="openBooking()">Bookings</a><a href="#" onclick="openDashboard()">Dashboard</a><a href="#" onclick="showToast('Customer support: homefix.demo@example.com')">Customer Support</a></nav>
+  <nav class="account-nav hidden" id="accountNav" aria-label="Account navigation">
+   <a href="#" onclick="goToAccountTab('overview');return false">Dashboard</a>
+   <a href="#" onclick="goToAccountTab('bookings');return false">Bookings</a>
+   <a href="#" onclick="goToAccountTab('address');return false">Address</a>
+   <a href="#" onclick="goToAccountTab('support');return false">Customer Support</a>
+   <a href="#" onclick="goToAccountTab('profile');return false">My Profile</a>
+   <a href="#" onclick="logout();return false">Log out</a>
+  </nav>
+  <div class="navactions" id="publicActions"><button class="btn btn-outline" onclick="openAuth('login')">Log in</button><button class="btn btn-primary" onclick="openAuth('register')">Get Started</button><button class="btn btn-light menu" onclick="openAuth('login')">☰</button></div>
+ </div>
+</header>
+<main id="homeView">
+ <section class="hero"><div class="wrap hero-grid">
+  <div><span class="eyebrow">✦ Reliable help, right around the corner</span><h1>Home problems?<br><span>We've got the right</span> people.</h1><p>Book trusted local professionals for everyday home services. Find the right help, compare estimated prices and choose a time that works for you.</p>
+   <div class="searchbox"><input id="heroSearch" placeholder="Try plumber, electrician, carpenter..."><button class="btn btn-primary" onclick="searchService()">Search services →</button></div><p class="hero-note">Serving customers in villages and cities • Simple online booking</p>
+  </div>
+  <div class="hero-art"><div class="float-card float-one">✓ Verified professionals</div><div class="art-house">🏠</div><div class="art-caption">Care for every corner<br>of your home</div><div class="float-card float-two">🛠️  Services made simple</div></div>
+ </div></section>
+ <section class="section" id="services">
+  <div class="wrap">
+   <div class="section-head">
+    <div><h2>Our Services</h2><p>Choose the help you need. We'll help you find a local professional.</p></div>
+   </div>
+   <div class="service-grid" id="serviceGrid" aria-label="Home services">
+    <button class="service-card" type="button" onclick="selectService('Plumbing')"><div class="service-icon">🚰</div><h3>Plumbing</h3><p>Leaks, taps, pipes and water fittings</p></button>
+    <button class="service-card" type="button" onclick="selectService('Electrical')"><div class="service-icon">💡</div><h3>Electrical</h3><p>Lights, fans and switch repairs</p></button>
+    <button class="service-card" type="button" onclick="selectService('Carpentry')"><div class="service-icon">🪚</div><h3>Carpentry</h3><p>Doors, shelves and furniture repairs</p></button>
+    <button class="service-card" type="button" onclick="selectService('Mobile Repair')"><div class="service-icon">📱</div><h3>Mobile Repair</h3><p>Phone checks and device repairs</p></button>
+    <button class="show-more-card" id="showMoreServices" type="button" onclick="toggleMoreServices()" aria-expanded="false" aria-controls="additionalServices">
+     <span class="show-more-icon" aria-hidden="true">⌄</span><strong>Show More</strong>
+    </button>
+   </div>
+   <div class="additional-services" id="additionalServices" aria-hidden="true">
+    <div class="additional-services-grid">
+     <button class="service-card" type="button" onclick="selectService('AC Service')"><div class="service-icon">❄️</div><h3>AC Service</h3><p>Cleaning and routine maintenance</p></button>
+     <button class="service-card" type="button" onclick="selectService('Painting')"><div class="service-icon">🎨</div><h3>Painting</h3><p>Interior walls and touch-ups</p></button>
+     <button class="service-card" type="button" onclick="selectService('Appliance Repair')"><div class="service-icon">🧰</div><h3>Appliance Repair</h3><p>Help with everyday appliances</p></button>
+     <button class="service-card" type="button" onclick="selectService('Cleaning')"><div class="service-icon">🧹</div><h3>Cleaning</h3><p>Home cleaning and upkeep</p></button>
+    </div>
+   </div>
+  </div>
+ </section>
+ <section class="section" id="how" style="background:#eef2f9"><div class="wrap"><div class="section-head"><div><h2>How It Works</h2><p>Four simple steps from problem to solution.</p></div></div><div class="how-grid">
+  <div class="step"><div class="step-num">1</div><h3>Choose a service</h3><p>Select the service you need and enter your area or PIN code.</p></div>
+  <div class="step"><div class="step-num">2</div><h3>Find professionals</h3><p>View available professionals, skills, ratings and estimated prices.</p></div>
+  <div class="step"><div class="step-num">3</div><h3>Book online</h3><p>Choose a suitable date and time and submit your booking request.</p></div>
+  <div class="step"><div class="step-num">4</div><h3>Get the work done</h3><p>Track the booking status and share feedback after the service.</p></div>
+ </div></div></section>
+ <section class="section"><div class="wrap"><div class="cta"><div><h2>Are you a skilled professional?</h2><p>Join HomeFix and connect with more customers in your area.</p></div><button class="btn btn-primary" onclick="openAuth('register','technician')">Register as a technician →</button></div></div></section>
+</main>
+<section class="dashboard" id="dashboardView"><div class="wrap dash-layout">
+ <aside class="side"><div class="profile"><div class="avatar" id="avatar">HF</div><div><strong id="sideName">Demo User</strong><div class="hint" id="sideRole">Customer account</div></div></div><div class="side-menu">
+  <button class="active" onclick="dashTab('overview',this)">▦ Overview</button><button onclick="dashTab('profile',this)">♙ My Profile</button><button onclick="dashTab('bookings',this)">▤ My Bookings</button><button onclick="dashTab('address',this)">⌖ My Address</button><button onclick="dashTab('support',this)">? Help & Support</button><button id="techVerifyNav" class="hidden" onclick="dashTab('verification',this)">✓ Verification</button><button onclick="logout()">↪ Log out</button>
+ </div></aside>
+ <div class="dash-main"><h1 id="dashTitle">My Dashboard</h1><p id="dashSubtitle">Manage your HomeFix account and bookings.</p>
+  <div id="tab-overview"><div class="stat-grid"><div class="stat"><strong id="bookingCount">0</strong><span>Total bookings</span></div><div class="stat"><strong id="pendingCount">0</strong><span>Pending requests</span></div><div class="stat"><strong id="roleStat">Customer</strong><span>Account type</span></div></div><div class="panel"><h3>Recent activity</h3><div id="recentBookings" class="empty">No bookings yet. Choose a service to make your first booking.</div></div></div>
+  <div id="tab-profile" class="panel hidden"><h3>Profile details</h3><div id="profileDetails"></div></div>
+  <div id="tab-bookings" class="panel hidden"><h3>My bookings</h3><div id="allBookings" class="empty">No bookings yet.</div><button class="btn btn-primary" onclick="showHome();openBooking()">Book a service</button></div>
+  <div id="tab-address" class="panel hidden"><h3>Saved address</h3><div class="field"><label>House / street / area</label><input id="addressInput" placeholder="Enter your address"></div><div class="field"><label>City / village</label><input id="cityInput" placeholder="Enter city or village"></div><div class="field"><label>PIN code</label><input id="pinInput" maxlength="6" placeholder="6-digit PIN code"></div><button class="btn btn-primary" onclick="saveAddress()">Save address</button></div>
+  <div id="tab-support" class="panel hidden"><h3>Customer support</h3><p class="hint">For this student demo, support messages are not sent to a real team.</p><div class="field"><label>How can we help?</label><textarea id="supportMessage" rows="4" placeholder="Describe your question..."></textarea></div><button class="btn btn-primary" onclick="showToast('Demo message recorded on screen only.')">Submit request</button></div>
+  <div id="tab-verification" class="panel hidden"><h3>Technician verification</h3><div class="notice">Demo workflow: a real platform should verify identity and skills securely before a technician is listed as verified. Do not upload real documents to this prototype.</div><p id="verifyStatus">Verification status: Not submitted</p><button class="btn btn-primary" onclick="submitVerification()">Submit demo verification request</button></div>
+ </div>
+</div></section>
+<footer class="footer"><div class="wrap"><span>© 2026 HomeFix. Student project prototype.</span><span>Demo only • No real service providers or payments</span></div></footer>
+
+<div class="modal-backdrop" id="authModal" onclick="backdropClose(event,'authModal')"><div class="modal">
+ <div class="modal-head"><h2 id="authTitle">Welcome to HomeFix</h2><button class="close" onclick="closeModal('authModal')">×</button></div>
+ <div class="tabs"><button id="loginTab" class="active" onclick="setAuthMode('login')">Log in</button><button id="registerTab" onclick="setAuthMode('register')">Create account</button></div>
+ <div class="field"><label>Account type</label><select id="authRole" onchange="updateAuthFields()"><option value="customer">Customer</option><option value="technician">Technician</option></select></div>
+ <div class="field hidden" id="nameField"><label>Full name</label><input id="authName" placeholder="Enter your name"></div>
+ <div class="field"><label>Email address</label><input id="authEmail" type="email" placeholder="you@example.com"></div>
+ <div class="field"><label>Password</label><input id="authPassword" type="password" placeholder="At least 6 characters"></div>
+ <div class="field hidden" id="skillField"><label>Service category / skill</label><select id="authSkill"><option>Plumbing</option><option>Electrical</option><option>Carpentry</option><option>Mobile Repair</option><option>AC Service</option><option>Painting</option><option>Appliance Repair</option><option>Cleaning</option></select></div>
+ <div class="field hidden" id="areaField"><label>Work area / PIN code</label><input id="authArea" placeholder="Your service area"></div>
+ <div class="notice">This is a classroom demo. Use fictional details only. No real identity documents or payments are collected.</div>
+ <button class="btn btn-primary full" id="authSubmit" onclick="submitAuth()">Continue</button><p class="hint" style="text-align:center">Technician accounts remain pending until demo verification is reviewed.</p>
+</div></div>
+<div class="modal-backdrop" id="bookingModal" onclick="backdropClose(event,'bookingModal')"><div class="modal">
+ <div class="modal-head"><h2>Book a service</h2><button class="close" onclick="closeModal('bookingModal')">×</button></div>
+ <div class="field"><label>Service</label><select id="bookService"><option>Plumbing</option><option>Electrical</option><option>Carpentry</option><option>Mobile Repair</option><option>AC Service</option><option>Painting</option><option>Appliance Repair</option><option>Cleaning</option></select></div>
+ <div class="field"><label>Your area / PIN code</label><input id="bookLocation" placeholder="Enter your area"></div>
+ <div class="field"><label>Preferred date</label><input id="bookDate" type="date"></div>
+ <div class="field"><label>Preferred time</label><select id="bookTime"><option>Morning (9 AM – 12 PM)</option><option>Afternoon (12 PM – 4 PM)</option><option>Evening (4 PM – 7 PM)</option></select></div>
+ <div class="field"><label>Describe the issue</label><textarea id="bookIssue" rows="3" placeholder="Briefly describe what needs repair"></textarea></div>
+ <button class="btn btn-primary full" onclick="submitBooking()">Submit booking request</button>
+</div></div>
+<div class="toast" id="toast"></div>
+<script src="data/services.js"></script>
+<script src="data/technicians.js"></script>
+<script src="data/demo-bookings.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/main.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/services.js"></script>
+<script src="js/bookings.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/technician.js"></script>
+</body>
+</html>
